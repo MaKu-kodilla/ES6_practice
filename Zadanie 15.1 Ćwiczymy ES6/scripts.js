@@ -3,7 +3,7 @@
 const firstWord = 'Hello';
 const secondWord = 'World';
 
-const helloWorld = (`${firstWord} ${secondWord}`);
+const helloWorld = `${firstWord} ${secondWord}`;
 
 console.log(helloWorld);
 
@@ -16,7 +16,8 @@ name();
 
 const multiply = (number1 = 1, number2 = 1) => number1 * number2;
 
-console.log(multiply(2, 5));
+
+console.log(multiply(2 * 5));
 console.log(multiply(6, 5));
 console.log(multiply(5));
 
@@ -38,14 +39,12 @@ console.log(average(1, 3, 6, 6));
 
  const grades = [1, 5, 5, 5, 4, 3, 3, 2, 1];
 
-average(...grades);
-
 console.log(average(...grades));
 
 // TASK 5
 
 const array =  [1, 4, 'Iwona', false, 'Nowak'];
 
-[, , firstName, , lastName] = array;
+const [, , firstName, , lastName] = array;
 
 console.log(`My name is: ${firstName} ${lastName}`);
