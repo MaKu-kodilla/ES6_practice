@@ -15,9 +15,8 @@ name();
 //TASK 2
 
 const multiply = (number1 = 1, number2 = 1) => number1 * number2;
-const operation = 2 * 5;
 
-console.log(multiply(2, `${operation}`));
+console.log(multiply(2, `${2 * 5}`));
 console.log(multiply(6, 5));
 console.log(multiply(5));
 
