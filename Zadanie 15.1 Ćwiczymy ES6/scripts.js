@@ -16,7 +16,7 @@ name();
 
 const multiply = (number1 = 1, number2 = 1) => number1 * number2;
 
-console.log(multiply(2, `${2 * 5}`));
+console.log(`2 * 5:${multiply(2, 5)}`);
 console.log(multiply(6, 5));
 console.log(multiply(5));
 
