@@ -1,9 +1,9 @@
 class App extends React.Component{
-constructor() {
-    super();
-    this.state = {
-        searchText: '',
-        users: []
+    constructor() {
+        super();
+        this.state = {
+            searchText: '',
+            users: []
         };
     }
 
