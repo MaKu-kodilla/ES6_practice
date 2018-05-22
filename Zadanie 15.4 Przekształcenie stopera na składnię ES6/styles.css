@@ -1,0 +1,26 @@
+body {
+    margin: 40vh auto;
+    text-align: center;
+    color: #BBB;
+    background-color: #607D8B;
+    text-shadow: 1px 1px;
+    overflow: hidden;
+}
+
+nav {
+    margin-bottom: 5vh;
+}
+a {
+    text-decoration: none;
+    padding: 15px;
+    color: #BBB;
+    font-size: 60px;
+}
+.stopwatch {
+    padding: 50px;
+    width: 25%;
+    margin: 0 auto;
+    font-size: 60px;
+    border: 2px solid #BBB;
+    box-shadow: 1px 1px;
+}
