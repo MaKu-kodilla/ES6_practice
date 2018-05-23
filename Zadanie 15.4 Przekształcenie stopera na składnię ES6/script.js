@@ -1,10 +1,10 @@
 
 class App extends React.Component {
     render() {
-    return (
-        <div className = {'App'}>
-        <Stopwatch />
-        </div>
+        return (
+            <div className={'App'}>
+            <Stopwatch />
+            </div>
         )
     }
 };
@@ -24,6 +24,19 @@ class StopWatch extends React.Component {
         this.handleStopClick = this.handleStopClick.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
     }
+    render() {
+        return (
+            <div className = {'main'}>
+                <nav className = {'controls'}>
+                    <a href = {'#'} className = {'button'} id = {'start'} onClick = {this.handleStartClick}>start</a>
+                    <a href = {'#'} className = {'button'} id = {'stop'} onClick = {this.handleStopClick}>stop</a>
+                </nav>
+                <nav className={'controls'}>
+                    <a href = {'#'} className = {'button'} id = {'reset'} onClick = {this.handleResetClick}>reset</a>
+                </nav>
+            </div>
+            )
+        }
 
     reset () {
         this.setState ({
@@ -72,12 +85,12 @@ class StopWatch extends React.Component {
     stop () {
         this.setState({
             running: false
-    });
-
-    clearInterval(this.watch);
+        });
+        clearInterval(this.watch);
+    }
 }
 
-pad0 (value) {
+function pad0 (value) {
     let result = value.toString();
     if (result.length < 2) {
         result = '0' + result;
@@ -85,21 +98,6 @@ pad0 (value) {
     }
 }
 
-
-render() {
-      return (
-        <div className = {'main'}>
-            <nav className = {'controls'}>
-                <a href = {'#'} className = {'button'} id = {'start'} onClick = {this.handleStartClick}>start</a>
-                <a href = {'#'} className = {'button'} id = {'stop'} onClick = {this.handleStopClick}>stop</a>
-            </nav>
-            <nav className={'controls'}>
-                <a href = {'#'} className = {'button'} id = {'reset'} onClick = {this.handleResetClick}>reset</a>
-            </nav>
-        </div>
-        )
-    }
-}
 
 const app = <App />;
 ReactDOM.render(app, document.getElementById('app'));
