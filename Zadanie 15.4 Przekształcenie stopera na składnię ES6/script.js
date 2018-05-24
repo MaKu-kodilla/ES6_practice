@@ -3,7 +3,7 @@ class App extends React.Component {
     render() {
         return (
             <div className={'App'}>
-            <Stopwatch />
+            <StopWatch />
             </div>
         )
     }
@@ -66,9 +66,9 @@ class StopWatch extends React.Component {
 
     step () {
         if (!this.state.running) return;
-        this.calculate();
-        // this.print();
-    }
+            this.calculate();
+            this.print();
+        }
 
     calculate () {
         this.times.miliseconds +=1;
