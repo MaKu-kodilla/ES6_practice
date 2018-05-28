@@ -87,8 +87,8 @@ var StopWatch = function (_React$Component2) {
             );
         }
     }, {
-        key: 'reset',
-        value: function reset() {
+        key: 'handleResetClick',
+        value: function handleResetClick() {
             this.setState({
                 minutes: 0,
                 seconds: 0,
@@ -110,8 +110,8 @@ var StopWatch = function (_React$Component2) {
             return this.pad0(minutes) + ':' + this.pad0(seconds) + ':' + this.pad0(Math.floor(miliseconds));
         }
     }, {
-        key: 'start',
-        value: function start() {
+        key: 'handleStartClick',
+        value: function handleStartClick() {
             var _this3 = this;
 
             if (!this.state.running) {
@@ -142,25 +142,26 @@ var StopWatch = function (_React$Component2) {
             }
         }
     }, {
-        key: 'stop',
-        value: function stop() {
+        key: 'handleStopClick',
+        value: function handleStopClick() {
             this.setState({
                 running: false
             });
             clearInterval(this.watch);
         }
+    }, {
+        key: 'pad0',
+        value: function pad0(value) {
+            var result = value.toString();
+            if (result.length < 2) {
+                result = '0' + result;
+            }
+            return result;
+        }
     }]);
 
     return StopWatch;
 }(React.Component);
-
-function pad0(value) {
-    var result = value.toString();
-    if (result.length < 2) {
-        result = '0' + result;
-        return result;
-    }
-}
 
 var app = React.createElement(App, null);
 ReactDOM.render(app, document.getElementById('app'));

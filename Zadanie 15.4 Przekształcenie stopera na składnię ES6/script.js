@@ -2,7 +2,7 @@
 class App extends React.Component {
     render() {
         return (
-            <div className={'App'}>
+            <div className = {'App'}>
             <StopWatch />
             </div>
         )
@@ -17,7 +17,7 @@ class StopWatch extends React.Component {
             times: {
                 minutes: 0,
                 seconds: 0,
-                miliseconds: 0,
+                miliseconds: 0
             },
         };
         this.handleStartClick = this.handleStartClick.bind(this);
@@ -38,7 +38,7 @@ class StopWatch extends React.Component {
             )
         }
 
-    reset () {
+    handleResetClick () {
         this.setState ({
             minutes: 0,
             seconds: 0,
@@ -57,7 +57,7 @@ class StopWatch extends React.Component {
         return `${this.pad0(minutes)}:${this.pad0(seconds)}:${this.pad0(Math.floor(miliseconds))}`
     }
 
-    start () {
+    handleStartClick () {
         if (!this.state.running) {
             this.state.running = true;
             this.watch = setInterval(() => this.step(), 10);
@@ -82,21 +82,22 @@ class StopWatch extends React.Component {
         }
     }
 
-    stop () {
+    handleStopClick () {
         this.setState({
             running: false
         });
         clearInterval(this.watch);
     }
-}
 
-function pad0 (value) {
-    let result = value.toString();
-    if (result.length < 2) {
-        result = '0' + result;
+    pad0 (value) {
+        let result = value.toString();
+        if (result.length < 2) {
+            result = '0' + result;
+        }
         return result;
     }
 }
+
 
 
 const app = <App />;
