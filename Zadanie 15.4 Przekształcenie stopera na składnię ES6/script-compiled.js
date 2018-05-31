@@ -73,17 +73,14 @@ var StopWatch = function (_React$Component2) {
                         'a',
                         { href: '#', className: 'button', id: 'stop', onClick: this.handleStopClick },
                         'stop'
-                    )
-                ),
-                React.createElement(
-                    'nav',
-                    { className: 'controls' },
+                    ),
                     React.createElement(
                         'a',
                         { href: '#', className: 'button', id: 'reset', onClick: this.handleResetClick },
                         'reset'
                     )
-                )
+                ),
+                React.createElement('div', { className: 'results', times: this.state.times })
             );
         }
     }, {
@@ -131,15 +128,26 @@ var StopWatch = function (_React$Component2) {
     }, {
         key: 'calculate',
         value: function calculate() {
-            this.times.miliseconds += 1;
-            if (this.times.miliseconds >= 100) {
-                this.times.seconds += 1;
-                this.times.miliseconds = 0;
+            var minutes = this.state.times.minutes;
+            var seconds = this.state.times.seconds;
+            var miliseconds = this.state.times.miliseconds;
+
+            miliseconds += 1;
+            if (miliseconds >= 100) {
+                seconds += 1;
+                miliseconds = 0;
             }
-            if (this.times.seconds >= 60) {
-                this.times.minutes += 1;
-                this.times.seconds = 0;
+            if (seconds >= 60) {
+                minutes += 1;
+                seconds = 0;
             }
+            this.setState({
+                times: {
+                    minutes: minutes,
+                    seconds: seconds,
+                    miliseconds: miliseconds
+                }
+            });
         }
     }, {
         key: 'handleStopClick',
