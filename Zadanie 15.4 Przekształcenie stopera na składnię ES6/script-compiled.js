@@ -23,7 +23,7 @@ var App = function (_React$Component) {
             return React.createElement(
                 'div',
                 { className: 'App' },
-                React.createElement(StopWatch, null)
+                React.createElement(Stopwatch, null)
             );
         }
     }]);
@@ -33,13 +33,13 @@ var App = function (_React$Component) {
 
 ;
 
-var StopWatch = function (_React$Component2) {
-    _inherits(StopWatch, _React$Component2);
+var Stopwatch = function (_React$Component2) {
+    _inherits(Stopwatch, _React$Component2);
 
-    function StopWatch(props) {
-        _classCallCheck(this, StopWatch);
+    function Stopwatch() {
+        _classCallCheck(this, Stopwatch);
 
-        var _this2 = _possibleConstructorReturn(this, (StopWatch.__proto__ || Object.getPrototypeOf(StopWatch)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this));
 
         _this2.state = {
             running: false,
@@ -55,7 +55,97 @@ var StopWatch = function (_React$Component2) {
         return _this2;
     }
 
-    _createClass(StopWatch, [{
+    _createClass(Stopwatch, [{
+        key: 'reset',
+        value: function reset() {
+            this.setState({
+                times: {
+                    minutes: 0,
+                    seconds: 0,
+                    miliseconds: 0
+                }
+            });
+        }
+    }, {
+        key: 'format',
+        value: function format(times) {
+            return this.pad0(this.state.times.minutes) + ':' + this.pad0(this.state.times.seconds) + ':' + this.pad0(Math.floor(this.state.times.miliseconds));
+        }
+    }, {
+        key: 'pad0',
+        value: function pad0(value) {
+            var result = value.toString();
+            if (result.length < 2) {
+                result = '0' + result;
+            }
+            return result;
+        }
+    }, {
+        key: 'handleStartClick',
+        value: function handleStartClick() {
+            var _this3 = this;
+
+            if (!this.state.running) {
+                this.setState({
+                    running: true
+                });
+                this.watch = setInterval(function () {
+                    return _this3.step();
+                }, 10);
+            }
+        }
+    }, {
+        key: 'step',
+        value: function step() {
+            if (!this.state.running) return;
+            this.calculate();
+        }
+    }, {
+        key: 'handleStopClick',
+        value: function handleStopClick() {
+            this.setState({
+                running: false
+            });
+            clearInterval(this.watch);
+        }
+    }, {
+        key: 'handleResetClick',
+        value: function handleResetClick() {
+            this.handleStopClick();
+            this.reset();
+        }
+    }, {
+        key: 'calculate',
+        value: function calculate() {
+            this.setState({
+                times: {
+                    minutes: this.state.times.minutes,
+                    seconds: this.state.times.seconds,
+                    miliseconds: this.state.times.miliseconds + 1
+                }
+            });
+
+            if (this.state.times.miliseconds >= 100) {
+                this.setState({
+                    times: {
+                        minutes: this.state.times.minutes,
+                        seconds: this.state.times.seconds + 1,
+                        miliseconds: 0
+                    }
+                });
+            }
+
+            if (this.state.times.seconds >= 60) {
+                this.setState({
+                    times: {
+                        minutes: this.state.times.minutes + 1,
+                        seconds: 0,
+                        miliseconds: this.state.times.miliseconds
+                    }
+                });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -73,102 +163,27 @@ var StopWatch = function (_React$Component2) {
                         'a',
                         { href: '#', className: 'button', id: 'stop', onClick: this.handleStopClick },
                         'stop'
-                    ),
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'counter' },
+                    this.format()
+                ),
+                React.createElement(
+                    'nav',
+                    { className: 'controls' },
                     React.createElement(
                         'a',
                         { href: '#', className: 'button', id: 'reset', onClick: this.handleResetClick },
                         'reset'
                     )
-                ),
-                React.createElement('div', { className: 'results', times: this.state.times })
+                )
             );
-        }
-    }, {
-        key: 'handleResetClick',
-        value: function handleResetClick() {
-            this.setState({
-                minutes: 0,
-                seconds: 0,
-                miliseconds: 0
-            });
-            this.print();
-        }
-    }, {
-        key: 'print',
-        value: function print() {
-            this.props.innerText = this.format();
-        }
-    }, {
-        key: 'format',
-        value: function format() {
-            var minutes = this.state.times.minutes;
-            var seconds = this.state.times.seconds;
-            var miliseconds = this.state.times.miliseconds;
-            return this.pad0(minutes) + ':' + this.pad0(seconds) + ':' + this.pad0(Math.floor(miliseconds));
-        }
-    }, {
-        key: 'handleStartClick',
-        value: function handleStartClick() {
-            var _this3 = this;
-
-            if (!this.state.running) {
-                this.state.running = true;
-                this.watch = setInterval(function () {
-                    return _this3.step();
-                }, 10);
-            }
-        }
-    }, {
-        key: 'step',
-        value: function step() {
-            if (!this.state.running) return;
-            this.calculate();
-            this.print();
-        }
-    }, {
-        key: 'calculate',
-        value: function calculate() {
-            var minutes = this.state.times.minutes;
-            var seconds = this.state.times.seconds;
-            var miliseconds = this.state.times.miliseconds;
-
-            miliseconds += 1;
-            if (miliseconds >= 100) {
-                seconds += 1;
-                miliseconds = 0;
-            }
-            if (seconds >= 60) {
-                minutes += 1;
-                seconds = 0;
-            }
-            this.setState({
-                times: {
-                    minutes: minutes,
-                    seconds: seconds,
-                    miliseconds: miliseconds
-                }
-            });
-        }
-    }, {
-        key: 'handleStopClick',
-        value: function handleStopClick() {
-            this.setState({
-                running: false
-            });
-            clearInterval(this.watch);
-        }
-    }, {
-        key: 'pad0',
-        value: function pad0(value) {
-            var result = value.toString();
-            if (result.length < 2) {
-                result = '0' + result;
-            }
-            return result;
         }
     }]);
 
-    return StopWatch;
+    return Stopwatch;
 }(React.Component);
 
 var app = React.createElement(App, null);
